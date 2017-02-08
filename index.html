@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CRYSTAL COLLECTOR</title>
+
+    
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+	<script src="assets/javascript/game.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+</head>
+<body>
+	<header class="container">
+		<div class="row">
+			<div class="col-md-12" id="title">
+				<h1>CRYSTAL COLLECTOR!</h1>
+			</div>
+		</div>
+	</header>
+	<div class="container" id="instructionContainer">
+		<div class="row">
+			<div class="col-md-12">
+				<p>You will be given a random number at the start of the game.</p>
+				<p>There are four crystals below. By clicking on a crystal, you will add a specific amount of points to your total score.</p>
+				<p>You win the game by matching your total score to the random number, you lose if your score goes above the random number.</p>
+				<p>The value of each crystal is hidden from you until you click on it.</p>
+				<p>Each time when the game starts, the value of the crystals with change.</p>
+			</div>
+		</div>
+	</div>
+	<div class="container" id="scoreBox">
+		<div class="row">
+
+			<div class="container">
+				<div class="col-md-6" id="randNumbDisplay">
+					<h2>0</h2>
+					<h2>Random Number</h2>
+				</div>
+			</div>
+					
+			<div class="col-md-6" id="winLossDisplay">
+				<h2>WINS:</h2>
+				<h2>LOSSES:</h2>
+			</div>
+
+		</div>
+	</div>
+	<div class="container" id="gemContainer">
+		<div class="row">	
+			<div class="col-md-12">
+				<img src="assets/images/GreenRupee.png" alt="Green Gem" id="greenGem">
+			
+	
+				<img src="assets/images/BlueRupee.png" alt="Blue Gem" id="blueGem">
+		
+			
+			
+				<img src="assets/images/RedRupee.png" alt="Red Gem" id="redGem">
+			
+			
+				<img src="assets/images/PurpleRupee.png" alt="Purple Gem" id="purpleGem">
+			</div>
+		</div>	
+	</div>
+	<div class="container" id="totalScore">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>YOUR TOTAL SCORE IS:</h1>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12" id="totalScoreDisplay">
+				<h1>0</h1>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
