@@ -19,89 +19,146 @@ The random number shown at the start of the game should be between 19 - 120.
  Each crystal should have a random hidden value between 1 - 12.
  */
 
- $(document).ready(function() {
 
- 	
- 	var greenGemValue = null;
- 	var blueGemValue = null;
- 	var redGemValue = null;
- 	var purpleGemValue = null;
- 	var randomNumber = null;
- 	var totalScore = 0;
- 	var wins = 0;
- 	var losses = 0;
 
- 	
- 	function startGame() {
+ var game = {
 
-		greenGemValue = randomIntFromInterval(1,19);
- 		blueGemValue = randomIntFromInterval(1,19);
- 		redGemValue = randomIntFromInterval(1,19);
- 		purpleGemValue = randomIntFromInterval(1,19);
- 		randomNumber = randomIntFromInterval(19,120);
- 		totalScore = 0;
- 		wins = 0;
- 		losses = 0;
+ 	greenGemValue:  null,
+ 	blueGemValue:  null,
+ 	redGemValue:  null,
+ 	purpleGemValue:  null,
+ 	randomNumber:  0,
+ 	totalScore:  0,
+ 	wins: 0,
+ 	losses:  0,
+ 	waitingForInput:  true,
 
- 		function displayWinLoss() {
+ 		//initialize
+ 		initialize: function() {
+
+ 			this.greenGemValue = this.randomIntFromInterval(1,19);
+ 			this.blueGemValue = this.randomIntFromInterval(1,19);
+ 			this.redGemValue = this.randomIntFromInterval(1,19);
+ 			this.purpleGemValue = this.randomIntFromInterval(1,19);
+ 			this.randomNumber = this.randomIntFromInterval(19,120);
+ 			this.totalScore = 0;
+ 			this.waitingForInput = false;
+
+ 			this.displayWinLoss();
+ 			this.displayRandomNumber();
+ 			console.log(this.randomNumber);
+ 		},
+
+ 		displayWinLoss: function() {
  			$("#winLossDisplay").empty();
- 			$("#winLossDisplay").html("<h2>WINS: " + wins + "</h2><h2>LOSSES: " + losses);
+ 			$("#winLossDisplay").html("<h2>WINS: " + this.wins + "</h2><h2>LOSSES: " + this.losses);
+ 		},
+
+ 		displayRandomNumber: function() {
+
+ 			$("#randNumbDisplay").empty();
+ 			$("#randNumbDisplay").html("<h2>" + this.randomNumber + "</h2>" + "<h2>Random Number</h2>");
+
+ 		},
+
+ 		randomIntFromInterval: function(min,max){
+
+ 			return Math.floor(Math.random()*(max-min+1)+min);
+
  		}
 
- 		function displayRandomNumber() {
- 			
- 			$("#randNumbDisplay").empty();
-			$("#randNumbDisplay").html("<h2>" + randomNumber + "</h2><h2>Random Number</h2>");
 
- 		};
+ 	};	
 
- 		function randomIntFromInterval(min,max){
-    		
-    		return Math.floor(Math.random()*(max-min+1)+min);
-			
-		};
+$(document).ready(function() {
 
-		displayWinLoss();
-		displayRandomNumber();
+	//gem on click-events
 
+	if (game.waitingForInput === true) {
+		game.initialize();
+	} 
 
-	
+	$("#greenGem").on("click", function() {
+		game.totalScore += game.greenGemValue;
+		$("#totalScoreDisplay").empty();
+		$("#totalScoreDisplay").html("<h1>" + game.totalScore + "</h1>");
+		if (game.randomNumber === game.totalScore) {
+			game.waitingForInput = true;
+			game.wins++;
+			game.displayWinLoss();
+			game.initialize();
 
-		$(gemId).on("click", function(gemValue) {
-		
-			totalScore += gemValue;
-			$("#totalScoreDisplay").empty();
-			$("#totalScoreDisplay").html("<h1>" + totalScore + "</h1>")
+		} else if (game.randomNumber < game.totalScore) {
+			game.waitingForInput = true;
+			game.losses++;
+			game.displayWinLoss();
+			game.initialize();
 		}
- 
- 	
- 	
- 		$("#blueGem").on("click", function() {
- 			totalScore += blueGemValue;
-			$("#totalScoreDisplay").empty();
-			$("#totalScoreDisplay").html("<h1>" + totalScore + "</h1>")
- 		});	
+	});
 
- 		$("#redGem").on("click", function() {
- 			totalScore += redGemValue;
-			$("#totalScoreDisplay").empty();
-			$("#totalScoreDisplay").html("<h1>" + totalScore + "</h1>")
+	$("#redGem").on("click", function() {
+		game.totalScore += game.redGemValue;
+		$("#totalScoreDisplay").empty();
+		$("#totalScoreDisplay").html("<h1>" + game.totalScore + "</h1>");
+		if (game.randomNumber === game.totalScore) {
+			game.waitingForInput = true;
+			game.wins++;
+			game.displayWinLoss();
+			game.initialize();
 
- 		});
-	
- 		$("#purpleGem").on("click", function() {
- 			totalScore += purpleGemValue;
-			$("#totalScoreDisplay").empty();
-			$("#totalScoreDisplay").html("<h1>" + totalScore + "</h1>")
- 		});
+		} else if (game.randomNumber < game.totalScore) {
+			game.waitingForInput = true;
+			game.losses++;
+			game.displayWinLoss();
+			game.initialize();
+		}
+	});
 
-	};
+	$("#blueGem").on("click", function() {
+		game.totalScore += game.blueGemValue;
+		$("#totalScoreDisplay").empty();
+		$("#totalScoreDisplay").html("<h1>" + game.totalScore + "</h1>");
+		if (game.randomNumber === game.totalScore) {
+			game.waitingForInput = true;
+			game.wins++;
+			game.displayWinLoss();
+			game.initialize();
 
- 	startGame();
- 	
+		} else if (game.randomNumber < game.totalScore) {
+			game.waitingForInput = true;
+			game.losses++;
+			game.displayWinLoss();
+			game.initialize();
+		}
+	});
 
+
+	$("#purpleGem").on("click", function() {
+		game.totalScore += game.purpleGemValue;
+		$("#totalScoreDisplay").empty();
+		$("#totalScoreDisplay").html("<h1>" + game.totalScore + "</h1>");
+		if (game.randomNumber === game.totalScore) {
+			game.waitingForInput = true;
+			game.wins++;
+			game.displayWinLoss();
+			game.initialize();
+
+		} else if (game.randomNumber < game.totalScore) {
+			game.waitingForInput = true;
+			game.losses++;
+			game.displayWinLoss();
+			game.initialize();
+		}
+	});
 
 });
-		
+
+
+	
+
+	
+
+
+
 
 
